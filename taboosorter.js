@@ -71,8 +71,12 @@
 
         sort: function (index) {
             var t = this;
-            index = index || t.settings.initial_column;
+            index = index || t.settings.initial_column,
+            el = $(t.el);
+
+            el.trigger('sort_start');
             t._sort_column(index);
+            el.trigger('sort_end');
         },
 
         _listen: function () {
