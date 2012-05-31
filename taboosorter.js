@@ -4,9 +4,8 @@
  * OPTIONS (all optional):
  *  initial_column: Index of initial column to sort. defaults to 0
  *  columns: header length array of dictionaries that hold column settings
- *      sort: true or false to enable sorting on column. defaults to true
  *      order: initial order to sort by, 'asc' or 'desc'. defaults to 'asc'
- *      sorter: type of sorter, 'text', 'number', or 'date'. defaults to 'text'
+ *      sort: type of sorter, 'text', 'number', 'date', or false to disable sorting. defaults to 'text'
  *  zebra_classes: 2 item array of odd and even classes, or false to skip. defaults to ['odd', 'even']
  *  header_classes: 3 item array of header sort classes, ascending class, and descending class. defaults to ['sort', 'asc', 'desc']
  *
@@ -35,7 +34,7 @@
     };
 
     $.taboosorter.prototype = {
-        constructor: $.sorter,
+        constructor: $.taboosorter,
 
         settings: {
             initial_column: 0,
@@ -43,9 +42,8 @@
             header_classes: ['sort', 'asc', 'desc'],
             columns: [],
             defaults: {
-                sort: true,
                 order: 'asc',
-                sorter: 'text'
+                sort: 'text'
             }
         },
 
@@ -54,8 +52,8 @@
                 return a > b ? 1 : a < b ? -1 : 0;
             },
             number: function (a, b) {
-                a = parseInt(a, 10);
-                b = parseInt(b, 10);
+                a = a * 1;
+                b = b * 1;
                 a = a != a ? inf : a;
                 b = b != b ? inf : b;
                     
@@ -115,7 +113,7 @@
         },
 
         _extract: function () {
-            return this.getAttribute('data-sortval') || this.textContent || this.innerText;
+            return (this.getAttribute('data-sortval') || this.textContent || this.innerText || '').toLowerCase();
         },
 
         _sort_column: function (index) {
@@ -123,7 +121,7 @@
                 extract = t._extract,
                 settings = t.settings,
                 column = settings.columns[index],
-                column_sorter = typeof column.sorter == 'function' ? column.sorter : t.sorters[column.sorter],
+                column_sorter = typeof column.sort == 'function' ? column.sort : t.sorters[column.sort],
                 order = column.order,
                 next_order = order == 'asc' ? 'desc' : 'asc',
                 header_classes = settings.header_classes,
