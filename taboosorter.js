@@ -70,9 +70,9 @@
         },
 
         sort: function (index) {
-            var t = this;
+            var t = this,
+                el = $(t.el);
             index = index || t.settings.initial_column,
-            el = $(t.el);
 
             el.trigger('sort_start');
             t._sort_column(index);
