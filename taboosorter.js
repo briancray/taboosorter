@@ -84,7 +84,7 @@
                 class_name = t.settings.header_classes[0];
 
             $(t.el).on('click', '.' + class_name, function (e) {
-                t._sort_column($(this).index());
+                t.sort($(this).index());
             });
         },
 
