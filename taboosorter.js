@@ -72,7 +72,7 @@
         sort: function (index) {
             var t = this,
                 el = $(t.el);
-            index = index || t.settings.initial_column,
+            index = index == undefined ? t.settings.initial_column : index,
 
             el.trigger('sort_start');
             t._sort_column(index);
