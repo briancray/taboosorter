@@ -60,8 +60,8 @@
                 return a - b;
             },
             date: function (a, b) {
-                var da = (new Date(a)).getTime(),
-                    db = (new Date(b)).getTime();
+                var da = +(new Date(a)),
+                    db = +(new Date(b));
                     
                 da = da != da ? inf : da;
                 db = db != db ? inf : db;
