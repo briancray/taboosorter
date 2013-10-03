@@ -52,8 +52,8 @@
                 return a > b ? 1 : a < b ? -1 : 0;
             },
             number: function (a, b) {
-                a = a * 1;
-                b = b * 1;
+                a = +a;
+                b = +b;
                 a = a != a ? inf : a;
                 b = b != b ? inf : b;
                     
@@ -136,8 +136,8 @@
                 table_body2 = table_body.cloneNode(false),
                 table_rows = table_body.rows,
                 table_row_count = table_rows.length,
-                table_rows2 = new Array(table_row_count),
-                sorting_index = new Array(table_row_count),
+                table_rows2 = [],
+                sorting_index = [],
                 table_headers = $(el.getElementsByTagName('thead')[0].rows[0].cells),
                 table_header_count = table_headers.length,
                 header_class,
